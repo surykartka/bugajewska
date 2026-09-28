@@ -13,8 +13,8 @@
 		'<figure class="uz-lightbox-figure">' +
 		'<img class="uz-lightbox-img" src="" alt="">' +
 		'<figcaption class="uz-lightbox-caption"></figcaption>' +
-		"</figure>" +
-		'<div class="uz-lightbox-thumbs"></div>';
+		'<div class="uz-lightbox-thumbs"></div>' +
+		"</figure>";
 	document.body.appendChild(overlay);
 
 	var imgEl = overlay.querySelector(".uz-lightbox-img");

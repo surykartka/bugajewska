@@ -28,7 +28,7 @@
 
 .uz-lightbox-img {
 	max-width: 100%;
-	max-height: 80vh;
+	max-height: 68vh;
 	object-fit: contain;
 	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
@@ -39,6 +39,45 @@
 	text-align: center;
 	font-size: 15px;
 	max-width: 80vw;
+}
+
+.uz-lightbox-thumbs {
+	display: flex;
+	gap: 10px;
+	margin-top: 18px;
+	max-width: 90vw;
+	overflow-x: auto;
+	padding: 4px;
+}
+
+.uz-lightbox-thumb {
+	flex: 0 0 auto;
+	width: 64px;
+	height: 64px;
+	padding: 0;
+	border: 2px solid transparent;
+	border-radius: 4px;
+	background: none;
+	cursor: pointer;
+	opacity: 0.6;
+	transition: opacity 0.2s ease, border-color 0.2s ease;
+	overflow: hidden;
+}
+
+.uz-lightbox-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.uz-lightbox-thumb:hover {
+	opacity: 0.9;
+}
+
+.uz-lightbox-thumb.is-active {
+	opacity: 1;
+	border-color: #fff;
 }
 
 .uz-lightbox-close,
@@ -102,5 +141,9 @@
 		width: 38px;
 		height: 38px;
 		font-size: 20px;
+	}
+	.uz-lightbox-thumb {
+		width: 48px;
+		height: 48px;
 	}
 }

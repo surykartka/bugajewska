@@ -13,7 +13,8 @@
 		'<figure class="uz-lightbox-figure">' +
 		'<img class="uz-lightbox-img" src="" alt="">' +
 		'<figcaption class="uz-lightbox-caption"></figcaption>' +
-		"</figure>";
+		"</figure>" +
+		'<div class="uz-lightbox-thumbs"></div>';
 	document.body.appendChild(overlay);
 
 	var imgEl = overlay.querySelector(".uz-lightbox-img");
@@ -21,6 +22,7 @@
 	var closeBtn = overlay.querySelector(".uz-lightbox-close");
 	var prevBtn = overlay.querySelector(".uz-lightbox-prev");
 	var nextBtn = overlay.querySelector(".uz-lightbox-next");
+	var thumbsEl = overlay.querySelector(".uz-lightbox-thumbs");
 
 	var currentItems = [];
 	var currentIndex = 0;
@@ -35,10 +37,36 @@
 		var multi = currentItems.length > 1;
 		prevBtn.style.display = multi ? "flex" : "none";
 		nextBtn.style.display = multi ? "flex" : "none";
+
+		var thumbButtons = thumbsEl.querySelectorAll(".uz-lightbox-thumb");
+		thumbButtons.forEach(function (btn, i) {
+			btn.classList.toggle("is-active", i === currentIndex);
+		});
+	}
+
+	function renderThumbs() {
+		thumbsEl.innerHTML = "";
+		if (currentItems.length <= 1) {
+			thumbsEl.style.display = "none";
+			return;
+		}
+		thumbsEl.style.display = "flex";
+		currentItems.forEach(function (item, i) {
+			var btn = document.createElement("button");
+			btn.type = "button";
+			btn.className = "uz-lightbox-thumb";
+			btn.setAttribute("aria-label", "Zdjęcie " + (i + 1));
+			btn.innerHTML = '<img src="' + item.src + '" alt="">';
+			btn.addEventListener("click", function () {
+				show(i);
+			});
+			thumbsEl.appendChild(btn);
+		});
 	}
 
 	function open(items, startIndex) {
 		currentItems = items;
+		renderThumbs();
 		show(startIndex || 0);
 		overlay.classList.add("is-open");
 		document.body.style.overflow = "hidden";

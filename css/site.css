@@ -75,8 +75,19 @@ a:hover { color: var(--clay-dark); }
 }
 .nav a:hover,
 .nav a[aria-current="page"] { color: #c9a48a; }
-.social { display: flex; gap: 10px; margin-left: 8px; }
-.social a { color: #fff; text-decoration: none; font-size: 13px; }
+.social { display: flex; gap: 8px; margin-left: 8px; }
+.social a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+  border-radius: 50%;
+  color: #fff;
+}
+.social a:hover,
+.social a:focus-visible { background: rgba(255, 255, 255, 0.14); }
+.social img { width: 20px; height: 20px; }
 .menu-toggle {
   display: none;
   margin-left: auto;

@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Regenerate uz-lightbox-data.js from whatever files are in gallery/<slug>/.
+"""Regenerate uz-lightbox-data.js from files in the product gallery folders.
 
-Run this after adding/removing/replacing images inside a gallery/<slug>/
-folder. Captions are kept for files whose path didn't change; new files
-get an empty caption you can fill in afterwards by editing
-uz-lightbox-data.js directly (each entry is {"src": ..., "caption": ...}).
+Run this after adding/removing/replacing images inside
+static/images/ceramika-uzytkowa/gallery/<slug>/. Captions are kept for files
+whose path didn't change; new files get an empty caption you can fill in
+afterwards by editing uz-lightbox-data.js directly.
 """
 import json
 import os
 import re
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-GALLERY_DIR = os.path.join(ROOT, "gallery")
+GALLERY_DIR = os.path.join(ROOT, "static", "images", "ceramika-uzytkowa", "gallery")
 DATA_FILE = os.path.join(ROOT, "uz-lightbox-data.js")
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 
@@ -42,7 +42,7 @@ def main():
     data = {}
 
     if not os.path.isdir(GALLERY_DIR):
-        print(f"No gallery/ directory found at {GALLERY_DIR}")
+        print(f"No product gallery directory found at {GALLERY_DIR}")
         return
 
     for slug in sorted(os.listdir(GALLERY_DIR)):
@@ -60,7 +60,7 @@ def main():
 
         items = []
         for fname in files:
-            src = f"gallery/{slug}/{fname}"
+            src = f"static/images/ceramika-uzytkowa/gallery/{slug}/{fname}"
             items.append({"src": src, "caption": old_captions.get(src, "")})
         data[slug] = items
         print(f"  {slug}: {len(items)} image(s)")
